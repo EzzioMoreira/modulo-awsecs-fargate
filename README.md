@@ -29,10 +29,9 @@ terraform {
 } 
 
 module "app-deploy" {
-  source                 = "git@github.com:gomex/terraform-module-fargate-deploy.git?ref=v0.1"
+  source                 = "git@github.com:EzzioMoreira/modulo-awsecs-fargate.git?ref=v0.1"
   containers_definitions = data.template_file.containers_definitions_json.rendered
   environment            = "development"
-  subdomain_name         = "app"
   app_name               = "app"
   app_port               = "80"
   cloudwatch_group_name  = "development-app"
