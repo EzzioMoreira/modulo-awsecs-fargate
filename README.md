@@ -29,7 +29,7 @@ terraform {
 } 
 
 module "app-deploy" {
-  source                 = "git@github.com:EzzioMoreira/modulo-awsecs-fargate.git?ref=v0.1"
+  source                 = "git@github.com:EzzioMoreira/modulo-awsecs-fargate.git?ref=v0.2"
   containers_definitions = data.template_file.containers_definitions_json.rendered
   environment            = "development"
   app_name               = "app"
