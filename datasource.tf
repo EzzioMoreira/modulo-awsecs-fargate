@@ -1,0 +1,26 @@
+data "aws_vpc" "main" {
+  tags = var.default_tags
+}
+
+data "aws_subnet_ids" "private" {
+  vpc_id = data.aws_vpc.main.id
+
+  tags = {
+    Name = "Private"
+  }
+}
+
+data "aws_subnet_ids" "public" {
+  vpc_id = data.aws_vpc.main.id
+
+  tags = {
+    Name = "Public"
+  }
+}
+
+data "aws_ecs_cluster" "main" {
+  cluster_name = var.default_tags
+}
+
+data "aws_caller_identity" "current" {
+}
