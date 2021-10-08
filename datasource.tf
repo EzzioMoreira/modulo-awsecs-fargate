@@ -8,7 +8,7 @@ data "aws_subnet_ids" "private" {
   vpc_id = data.aws_vpc.main.id
 
   tags = {
-    Name = "Privada"
+    Name = "Private"
   }
 }
 
