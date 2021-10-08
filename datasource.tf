@@ -1,5 +1,7 @@
 data "aws_vpc" "main" {
-  tags = var.default_tags
+  tags = {
+    Name = var.environment
+  }
 }
 
 data "aws_subnet_ids" "private" {
