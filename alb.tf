@@ -1,7 +1,7 @@
 # ALB Security group
 # This is the group you need to edit if you want to restrict access to your application
 resource "aws_security_group" "lb" {
-  name        = "${var.app_name}-${var.environment}"
+  name        = "default"
   description = "Controlers access to the ALB"
   vpc_id      = data.aws_vpc.main.id
 

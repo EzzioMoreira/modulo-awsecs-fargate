@@ -64,7 +64,7 @@ variable "APP_IMAGE" {
 }
 
 variable "aws_region" {
-  default = "us-east-1"
+  default = "us-east-2"
 }
 ```
 #### Container Definition
@@ -114,5 +114,4 @@ variable "aws_region" {
 
 | Name | Description |
 |------|-------------|
-| ecs_cluster_name | ECS cluster name. |
-| aws\_vpc\_id | The ID of AWS VPC created for the ECS cluster. ||
+| aws_lb_dns_name | The DNS name access app. ||

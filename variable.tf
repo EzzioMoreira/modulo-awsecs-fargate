@@ -15,11 +15,6 @@ variable "fargate_memory" {
   description = "The maximum of memory that the task can use."
 }
 
-variable "hosted_zone_id" {
-  type = string
-  description = "Hosted Zone ID"
-}
-
 variable "app_name" {
   type = string
   description = "How your app will be called."
@@ -27,7 +22,7 @@ variable "app_name" {
 
 variable "app_port" {
   type = number
-  default     = "3000"
+  default     = "80"
   description = "The PORT that will be used to communication between load balancer and container."
 }
 
