@@ -1,7 +1,7 @@
 # ALB Security group
 # This is the group you need to edit if you want to restrict access to your application
 resource "aws_security_group" "lb" {
-  name        = "default"
+  name        = "${var.app_name}-${var.environment}"
   description = "Controlers access to the ALB"
   vpc_id      = data.aws_vpc.main.id
 
@@ -32,7 +32,7 @@ resource "aws_security_group_rule" "allow_https" {
 }
 
 resource "aws_alb" "main" {
-  name            = "${var.app_name}-alb"
+  name            = "default"
   subnets         = data.aws_subnet_ids.public.ids
   security_groups = [aws_security_group.lb.id]
 }
