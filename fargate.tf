@@ -14,7 +14,7 @@ resource "aws_ecs_task_definition" "app" {
 }
 
 resource "aws_ecs_service" "main" {
-  name    = "${var.app_name}-svc"
+  name    = var.app_name
   cluster = data.aws_ecs_cluster.main.id
 
   task_definition = aws_ecs_task_definition.app.arn
