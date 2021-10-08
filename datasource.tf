@@ -19,7 +19,8 @@ data "aws_subnet_ids" "public" {
 }
 
 data "aws_ecs_cluster" "main" {
-  cluster_name = var.default_tags
+  cluster_name 
+  Name = var.environment
 }
 
 data "aws_caller_identity" "current" {
