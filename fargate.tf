@@ -11,14 +11,13 @@ resource "aws_ecs_task_definition" "app" {
   container_definitions = var.containers_definitions
 
   tags = {
-    Name = var.environment
+    Name = var.app_name
   }
 }
 
 resource "aws_ecs_service" "main" {
-  name    = var.app_name
+  name    = "${var.app_name}-svc"
   cluster = data.aws_ecs_cluster.main.id
-
   task_definition = aws_ecs_task_definition.app.arn
   desired_count   = var.app_count
   launch_type     = "FARGATE"

@@ -28,7 +28,7 @@ variable "app_port" {
 
 variable "app_count" {
   type = number
-  default     = "2"
+  default     = "1"
   description = "Number of tasks that will be deployed for this app."
 }
 
