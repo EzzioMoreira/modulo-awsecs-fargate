@@ -22,7 +22,7 @@ variable "app_name" {
 
 variable "app_port" {
   type = number
-  default     = "80"
+  default     = "3000"
   description = "The PORT that will be used to communication between load balancer and container."
 }
 
