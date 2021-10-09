@@ -11,8 +11,8 @@
 Create .env file to AWS credentials with access key and secret key.
 ```shell
 # AWS environment
-AWS_ACCESS_KEY_ID =
-AWS_SECRET_ACCESS_KEY =
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
 ```
 #### Create terrafile.tf file with content and set your configurations:
 ```terraform
@@ -30,7 +30,7 @@ terraform {
 } 
 
 module "app-deploy" {
-  source                 = "git@github.com:EzzioMoreira/modulo-awsecs-fargate.git?ref=appname"
+  source                 = "git@github.com:EzzioMoreira/modulo-awsecs-fargate.git?ref=v1.3"
   containers_definitions = data.template_file.containers_definitions_json.rendered
   environment            = "development"
   app_name               = "website"
@@ -44,8 +44,6 @@ data "template_file" "containers_definitions_json" {
   vars = {
     APP_VERSION = var.APP_VERSION
     APP_IMAGE   = var.APP_IMAGE
-    ENVIRONMENT = var.ENVIRONMENT
-    AWS_REGION  = var.aws_region
   }
 }
 
@@ -57,15 +55,12 @@ variable "APP_IMAGE" {
   default = "website"
 }
 
-variable "ENVIRONMENT" {
-  default = "development"
-}
-
-variable "aws_region" {
-  default = "us-east-2"
-}
 ```
 #### Container Definition
+create file named containers_definitions_json with the following content.
+- your ECR address: 520044189785.dkr.ecr.us-east-2.amazonaws.com
+- "name": call the variable:  "${APP_IMAGE}"
+- calls the variables: ${APP_IMAGE}: ${APP_VERSION} "
 ```json
 [
   {
