@@ -3,7 +3,7 @@ cnf ?= .env
 include $(cnf)
 export $(shell sed 's/=.*//' $(cnf))
 
-# Get the latest tag
+# Enter your variables here:
 TAG=$(shell git describe --tags --abbrev=0)
 GIT_COMMIT=$(shell git log -1 --format=%h)
 AWS_ACCOUNT=520044189785
