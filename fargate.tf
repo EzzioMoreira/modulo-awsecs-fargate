@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "app" {
   container_definitions = var.containers_definitions
 
   tags = {
-    Name = var.enviroment
+    Name = var.environment
   }
 }
 

@@ -3,6 +3,6 @@ resource "aws_cloudwatch_log_group" "main" {
   retention_in_days = "7"
 
   tags = {
-    Name = var.enviroment
+    Name = var.environment
   }
 }
