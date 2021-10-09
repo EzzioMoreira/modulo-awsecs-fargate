@@ -1,5 +1,3 @@
-# ALB Security group
-# This is the group you need to edit if you want to restrict access to your application
 resource "aws_security_group" "lb" {
   name        = "${var.app_name}-${var.environment}"
   description = "Controlers access to the ALB"
@@ -45,7 +43,6 @@ resource "aws_alb_target_group" "app" {
   target_type = "ip"
 }
 
-# Redirect all traffic from the ALB to the target group
 resource "aws_alb_listener" "front_end" {
   load_balancer_arn = aws_alb.main.arn
   port              = "80"
