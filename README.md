@@ -4,7 +4,6 @@
 * Create ECS Service Fargate
 * Create Application Load Balance
 * Create Target Group
-* Create Monitoring Log in AWS CloudWatch
 
 ## Usage
 ##### Credential for AWS
