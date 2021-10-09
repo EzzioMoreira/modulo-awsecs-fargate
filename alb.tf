@@ -43,12 +43,6 @@ resource "aws_alb_target_group" "app" {
   protocol    = "HTTP"
   vpc_id      = data.aws_vpc.main.id
   target_type = "ip"
-
-  health_check {
-    path     = var.health_check_path
-    interval = 60
-    timeout  = 30
-  }
 }
 
 # Redirect all traffic from the ALB to the target group
