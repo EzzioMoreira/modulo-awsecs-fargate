@@ -91,7 +91,7 @@ create file named containers_definitions_json with the following content.
 ]
 ```
 
-## Terraform inputs
+#### Terraform inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
@@ -106,7 +106,7 @@ create file named containers_definitions_json with the following content.
 | containers\_definitions | The json file with the container definition task. | file | `"containers_definitions.json"` | yes |
 
 
-## The visual representation
+#### The visual representation
 ```shell
 # run the command for terraform shell
 make terraform-sh
@@ -117,7 +117,25 @@ apk -U add graphviz
 # Command is used to generate a visual representation
 terraform graph | dot -Tsvg > graph.svg
 ```
+#### For help, run the following commands: ```make help```:
+##### Print:
 
-## To be
+```make
+make help:         ## Run make help.
+docker-run-local:  ## Run the container on the local machine.
+docker-stop-local: ## Destroy the container on the local machine.
+ecr-build:         ## ECR-step:1 Build your Docker image.
+ecr-login:         ## ECR-step:2 Retrieve an authentication token and authenticate your Docker client to your registry.
+ecr-tag:           ## ECR-step:3 Tag your image so you can push the image to this repository.
+ecr-push:          ## ECR-step:4 Push this image to your newly created AWS repository.
+terraform-fmt:     ## Command is used to rewrite Terraform configuration files to a canonical format and style.
+terraform-init:    ## Run terraform init to download all necessary plugins
+terraform-plan:    ## Exec a terraform plan and puts it on a file called plano
+terraform-apply:   ## Uses plano to apply the changes on AWS.
+terraform-destroy: ## Destroy all resources created by the terraform file in this repo.
+terraform-sh:      ## Exec Terraform CLI.
+```
+
+#### To be
 - We need the log configuration with AWS CloudWatch.
 - Output: The dns_name the application load balancer.
