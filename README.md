@@ -54,12 +54,12 @@ data "template_file" "containers_definitions_json" {
 
 variable "APP_VERSION" {
     default   = "bead89c"
-    describle = "Version comes from git commit in Makefile."
+    describle = "Version comes from the variable GIT_COMMIT in Makefile."
 }
 
 variable "APP_IMAGE" {
   default   = "website"
-  describle = "Name comes from variable APP_IMAGE in Makefile"
+  describle = "Name comes from the variable APP_IMAGE in Makefile"
 }
 
 ```
