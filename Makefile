@@ -3,7 +3,7 @@ cnf ?= .env
 include $(cnf)
 export $(shell sed 's/=.*//' $(cnf))
 
-# Enter your variables here:
+# Get the latest tag
 TAG=$(shell git describe --tags --abbrev=0)
 GIT_COMMIT=$(shell git log -1 --format=%h)
 AWS_ACCOUNT=520044189785
@@ -35,7 +35,7 @@ ecr-login: ## ECR-step:2 Retrieve an authentication token and authenticate your 
 	export AWS_ACCESS_KEY_ID=${AWS_SECRET_ACCESS_KEY}
 	aws ecr get-login-password --region ${AWS_REGIO} | docker login --username AWS --password-stdin ${AWS_ACCOUNT}.dkr.ecr.us-east-2.amazonaws.com
 
-ecr-tag: ecr-login ecr-build ## ECR-step:3 Tag your image so you can push the image to this repository.
+ecr-tag: ## ECR-step:3 Tag your image so you can push the image to this repository.
 	docker tag  ${APP_NAME}:${GIT_COMMIT} ${AWS_ACCOUNT}.dkr.ecr.us-east-2.amazonaws.com/${APP_NAME}:${GIT_COMMIT}
 
 ecr-push: ## ECR-step:4 Push this image to your newly created AWS repository.
