@@ -5,6 +5,12 @@
 * Create Application Load Balance
 * Create Target Group
 
+#### Requisites for running this project:
+- Docker
+- Docker-compose
+- Make
+- AWS CLI version 2
+
 ## Usage
 ##### Credential for AWS
 Create .env file to AWS credentials with access key and secret key.
