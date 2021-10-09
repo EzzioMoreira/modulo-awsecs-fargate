@@ -54,12 +54,17 @@ data "template_file" "containers_definitions_json" {
 
 variable "APP_VERSION" {
     default   = "bead89c"
-    describle = "Version comes from the variable GIT_COMMIT in Makefile."
+    describle = "Get the value of variable GIT_COMMIT in Makefile."
 }
 
 variable "APP_IMAGE" {
   default   = "website"
-  describle = "Name comes from the variable APP_IMAGE in Makefile"
+  describle = "Get the value of variable APP_IMAGE in Makefile"
+}
+
+variable "AWS_ACCOUNT" {
+  default   = "520044189785"
+  describle = "Get the value of variable AWS_ACCOUNT in Makefile"
 }
 
 ```
@@ -72,7 +77,7 @@ create file named containers_definitions_json with the following content.
 [
   {
     "cpu": 256,
-    "image": "520044189785.dkr.ecr.us-east-2.amazonaws.com/${APP_IMAGE}:${APP_VERSION}",
+    "image": "${AWS_ACCOUNT}.dkr.ecr.us-east-2.amazonaws.com/${APP_IMAGE}:${APP_VERSION}",
     "memory": 1024,
     "name": "${APP_IMAGE}",
     "networkMode": "awsvpc",
