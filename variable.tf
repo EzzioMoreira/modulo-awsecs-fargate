@@ -22,13 +22,13 @@ variable "app_name" {
 
 variable "app_port" {
   type = number
-  default     = "80"
+  default     = "3000"
   description = "The PORT that will be used to communication between load balancer and container."
 }
 
 variable "app_count" {
   type = number
-  default     = "2"
+  default     = "1"
   description = "Number of tasks that will be deployed for this app."
 }
 

@@ -1,5 +1,3 @@
-# ALB Security group
-# This is the group you need to edit if you want to restrict access to your application
 resource "aws_security_group" "lb" {
   name        = "${var.app_name}-${var.environment}"
   description = "Controlers access to the ALB"
@@ -32,7 +30,7 @@ resource "aws_security_group_rule" "allow_https" {
 }
 
 resource "aws_alb" "main" {
-  name            = "default"
+  name            = "${var.app_name}-alb"
   subnets         = data.aws_subnet_ids.public.ids
   security_groups = [aws_security_group.lb.id]
 }
@@ -43,15 +41,7 @@ resource "aws_alb_target_group" "app" {
   protocol    = "HTTP"
   vpc_id      = data.aws_vpc.main.id
   target_type = "ip"
-
-  health_check {
-    path     = var.health_check_path
-    interval = 50
-    timeout  = 30
-  }
 }
-
-# Redirect all traffic from the ALB to the target group
 
 resource "aws_alb_listener" "front_end" {
   load_balancer_arn = aws_alb.main.arn
