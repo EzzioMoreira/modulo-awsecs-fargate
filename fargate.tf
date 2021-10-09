@@ -10,7 +10,9 @@ resource "aws_ecs_task_definition" "app" {
 
   container_definitions = var.containers_definitions
 
-  tags = var.default_tags
+  tags = {
+    Name = var.enviroment
+  }
 }
 
 resource "aws_ecs_service" "main" {

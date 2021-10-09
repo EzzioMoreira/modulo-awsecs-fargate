@@ -1,6 +1,8 @@
-resource "aws_cloudwatch_log_group" "monit" {
+resource "aws_cloudwatch_log_group" "main" {
   name              = var.cloudwatch_group_name
   retention_in_days = "7"
 
-  tags = var.default_tags
+  tags = {
+    Name = var.enviroment
+  }
 }
