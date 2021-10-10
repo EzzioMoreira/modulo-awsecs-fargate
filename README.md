@@ -122,7 +122,8 @@ Create file named containers_definitions_json with the following content.
 ### Terraform Output
 
 | Name | Description |
-| load\_balancer\_dns\_name | Application load balancer DNS name the  ||
+|:------:|:-------------:|
+| load\_balancer\_dns\_name | Application load balancer DNS name.  ||
 
 ### The visual representation
 ```shell
