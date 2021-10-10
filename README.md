@@ -3,7 +3,7 @@
 ## What will be created.
 * Create ECS Service Fargate
 * Create ECS Task Definition
-* Create task
+* Create Task
 * Create Application Load Balance
 * Create Target Group
 
@@ -82,10 +82,10 @@ variable "AWS_ACCOUNT" {
 
 ```
 ### Container Definition
-create file named containers_definitions_json with the following content.
-- your ECR address: 520044189785.dkr.ecr.us-east-2.amazonaws.com
+Create file named containers_definitions_json with the following content.
+- your ECR address:           "520044189785.dkr.ecr.us-east-2.amazonaws.com"
 - "name": call the variable:  "${APP_IMAGE}"
-- calls the variables: ${APP_IMAGE}: ${APP_VERSION} "
+- calls the variables:        "${APP_IMAGE}: ${APP_VERSION}"
 ```json
 [
   {
