@@ -1,6 +1,6 @@
 # This Module Terraform deploy an APP in AWS ECS Fargate:
 
-### What will be created.
+### What will be created:
 * Create ECS Service Fargate
 * Create ECS Task Definition
 * Create Task
@@ -13,8 +13,8 @@
 - Make
 - AWS CLI version 2
 
-### How do you use
-### Credential for AWS
+### How do you use:
+### Credential for AWS:
 Create `.env` file to AWS credentials with access key and secret key.
 ```shell
 # AWS environment
@@ -83,7 +83,7 @@ variable "AWS_ACCOUNT" {
 }
 
 ```
-### Container Definition
+### Container Definition:
 Create file named containers_definitions_json with the following content.
 - your ECR address:           "520044189785.dkr.ecr.us-east-2.amazonaws.com"
 - "name": call the variable:  "${APP_IMAGE}"
@@ -93,7 +93,7 @@ Create file named containers_definitions_json with the following content.
   {
     "cpu": 256,
     "image": "${AWS_ACCOUNT}.dkr.ecr.us-east-2.amazonaws.com/${APP_IMAGE}:${APP_VERSION}",
-    "memory": 1024,
+    "memory": 256,
     "name": "${APP_IMAGE}",
     "networkMode": "awsvpc",
     "portMappings": [
@@ -101,12 +101,20 @@ Create file named containers_definitions_json with the following content.
         "containerPort": 80,
         "hostPort": 80
       }
-    ]
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+          "awslogs-group": "${APP_IMAGE}",
+          "awslogs-region": "us-east-2",
+          "awslogs-stream-prefix": "${APP_IMAGE}-${APP_VERSION}"
+      }
+    }
   }
 ]
 ```
 
-### Terraform inputs
+### Terraform inputs:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
@@ -121,13 +129,13 @@ Create file named containers_definitions_json with the following content.
 | cloudwatch\_group_name | CloudWatch group name where to send the logs. | string | `"empty"`| yes | 
 | containers\_definitions | The json file with the container definition task. | file | `"containers_definitions.json"` | yes ||
 
-### Terraform Output
+### Terraform Output:
 
 | Name | Description |
 |:------:|:-------------:|
 | load\_balancer\_dns\_name | Application load balancer DNS name.  ||
 
-### The visual representation
+### The visual representation:
 ```shell
 # run the command for terraform shell
 make terraform-sh
@@ -156,6 +164,3 @@ terraform-apply:   ## Uses plano to apply the changes on AWS.
 terraform-destroy: ## Destroy all resources created by the terraform file in this repo.
 terraform-sh:      ## Exec Terraform CLI.
 ```
-
-#### To be
-- We need the log configuration with AWS CloudWatch.
