@@ -68,18 +68,18 @@ data "template_file" "containers_definitions_json" {
 }
 
 variable "APP_VERSION" {
-    default   = "latest"
-    describle = "Get the value of variable GIT_COMMIT in Makefile."
+  default   = "latest"
+  description = "Get the value of variable GIT_COMMIT in Makefile."
 }
 
 variable "APP_IMAGE" {
   default   = "you-image-name"
-  describle = "Get the value of variable APP_IMAGE in Makefile"
+  description = "Get the value of variable APP_IMAGE in Makefile"
 }
 
 variable "AWS_ACCOUNT" {
   default   = "your-account-id"
-  describle = "Get the value of variable AWS_ACCOUNT in Makefile"
+  description = "Get the value of variable AWS_ACCOUNT in Makefile"
 }
 
 ```
