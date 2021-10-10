@@ -40,7 +40,6 @@ variable "environment" {
 
 variable "cloudwatch_group_name" {
   type = string
-  default     = "sample-group-name"
   description = "CloudWatch group name where to send the logs."
 }
 

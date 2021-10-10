@@ -22,7 +22,7 @@ AWS_ACCESS_KEY_ID=your-access-key-here
 AWS_SECRET_ACCESS_KEY=your-secret-key-here
 ```
 
-### 2.2: Configure your variables in Makefile file.
+### 2.2: Configure your variables in `Makefile` file.
 - `AWS_ACCOUNT`=you_account-id
 - `APP_IMAGE`=application_name
 - `AWS_REGIO`=you_aws_region
@@ -111,9 +111,13 @@ create file named containers_definitions_json with the following content.
 | app\_port | The port used for communication between the application load balancer and container. | number | `"80"` | no |
 | app\_count | Number of tasks to be deployed to the application. | number | `"1"` | no |
 | environment | The environment name to app.. | string | `"development"` | no |
-| containers\_definitions | The json file with the container definition task. | file | `"containers_definitions.json"` | yes |
+| cloudwatch\_group_name | CloudWatch group name where to send the logs. | string | yes | 
+| containers\_definitions | The json file with the container definition task. | file | `"containers_definitions.json"` | yes ||
 
 ### Terraform Output
+
+| Name | Description |
+| load\_balancer\_dns\_name | Application load balancer DNS name the  ||
 
 ### The visual representation
 ```shell
@@ -126,7 +130,7 @@ apk -U add graphviz
 # Command is used to generate a visual representation
 terraform graph | dot -Tsvg > graph.svg
 ```
-### For help, run the following commands: ```make help```:
+### For help, run the following commands: `make help`:
 #### Print:
 
 ```make
@@ -147,4 +151,3 @@ terraform-sh:      ## Exec Terraform CLI.
 
 #### To be
 - We need the log configuration with AWS CloudWatch.
-- Output: The dns_name the application load balancer.
