@@ -43,12 +43,16 @@ terraform {
 } 
 
 module "app-deploy" {
-  source                 = "git@github.com:EzzioMoreira/modulo-awsecs-fargate.git?ref=v1.3"
+  source                 = "git@github.com:EzzioMoreira/modulo-awsecs-fargate.git?ref=v1.4"
   containers_definitions = data.template_file.containers_definitions_json.rendered
   environment            = "your-environment"
   app_name               = "your-app-name"
   app_port               = "80"
   fargate_version        = "1.4.0"
+}
+
+output "load_balancer_dns_name" {
+  value = module.app-deploy.loadbalance_dns_name
 }
 
 data "template_file" "containers_definitions_json" {
@@ -57,6 +61,7 @@ data "template_file" "containers_definitions_json" {
   vars = {
     APP_VERSION = var.APP_VERSION
     APP_IMAGE   = var.APP_IMAGE
+    AWS_ACCOUNT = var.AWS_ACCOUNT
   }
 }
 
@@ -110,8 +115,8 @@ create file named containers_definitions_json with the following content.
 | app\_name | Name of your application. | string | `"empty"` | yes |
 | app\_port | The port used for communication between the application load balancer and container. | number | `"80"` | no |
 | app\_count | Number of tasks to be deployed to the application. | number | `"1"` | no |
-| environment | The environment name to app.. | string | `"development"` | no |
-| cloudwatch\_group_name | CloudWatch group name where to send the logs. | string | yes | 
+| environment | The environment name to app. | string | `"development"` | no |
+| cloudwatch\_group_name | CloudWatch group name where to send the logs. | string | `"empty"`| yes | 
 | containers\_definitions | The json file with the container definition task. | file | `"containers_definitions.json"` | yes ||
 
 ### Terraform Output
