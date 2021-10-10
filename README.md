@@ -1,25 +1,33 @@
 ### This Module Terraform deploy an APP in AWS ECS Fargate:
 
-* Create ECS Task Definition
+## What will be created.
 * Create ECS Service Fargate
+* Create ECS Task Definition
+* Create task
 * Create Application Load Balance
 * Create Target Group
 
-#### Requisites for running this project:
+### Requisites for running this project:
 - Docker
 - Docker-compose
 - Make
 - AWS CLI version 2
 
-## Usage
-##### Credential for AWS
-Create .env file to AWS credentials with access key and secret key.
+### How do you use
+### Credential for AWS
+Create `.env` file to AWS credentials with access key and secret key.
 ```shell
 # AWS environment
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
+AWS_ACCESS_KEY_ID=your-access-key-here
+AWS_SECRET_ACCESS_KEY=your-secret-key-here
 ```
-#### Create terrafile.tf file with content and set your configurations:
+
+### 2.2: Configure your variables in Makefile file.
+- `AWS_ACCOUNT`=you_account-id
+- `APP_IMAGE`=application_name
+- `AWS_REGIO`=you_aws_region
+
+### Create `terrafile.tf` file with content and set your configurations. If you prefer, change the environment variable name.
 ```terraform
 provider "aws" {
   region  = "us-east-2"
@@ -29,7 +37,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "your-bucket-here"
-    key    = "key-terraform-.tfstate"
+    key    = "path/keyname-terraform-.tfstate"
     region = "us-east-2"
   }
 } 
@@ -37,8 +45,8 @@ terraform {
 module "app-deploy" {
   source                 = "git@github.com:EzzioMoreira/modulo-awsecs-fargate.git?ref=v1.3"
   containers_definitions = data.template_file.containers_definitions_json.rendered
-  environment            = "development"
-  app_name               = "website"
+  environment            = "your-environment"
+  app_name               = "your-app-name"
   app_port               = "80"
   fargate_version        = "1.4.0"
 }
@@ -53,22 +61,22 @@ data "template_file" "containers_definitions_json" {
 }
 
 variable "APP_VERSION" {
-    default   = "bead89c"
+    default   = "latest"
     describle = "Get the value of variable GIT_COMMIT in Makefile."
 }
 
 variable "APP_IMAGE" {
-  default   = "website"
+  default   = "you-image-name"
   describle = "Get the value of variable APP_IMAGE in Makefile"
 }
 
 variable "AWS_ACCOUNT" {
-  default   = "520044189785"
+  default   = "your-account-id"
   describle = "Get the value of variable AWS_ACCOUNT in Makefile"
 }
 
 ```
-#### Container Definition
+### Container Definition
 create file named containers_definitions_json with the following content.
 - your ECR address: 520044189785.dkr.ecr.us-east-2.amazonaws.com
 - "name": call the variable:  "${APP_IMAGE}"
@@ -91,7 +99,7 @@ create file named containers_definitions_json with the following content.
 ]
 ```
 
-#### Terraform inputs
+### Terraform inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
@@ -105,8 +113,9 @@ create file named containers_definitions_json with the following content.
 | environment | The environment name to app.. | string | `"development"` | no |
 | containers\_definitions | The json file with the container definition task. | file | `"containers_definitions.json"` | yes |
 
+### Terraform Output
 
-#### The visual representation
+### The visual representation
 ```shell
 # run the command for terraform shell
 make terraform-sh
@@ -117,8 +126,8 @@ apk -U add graphviz
 # Command is used to generate a visual representation
 terraform graph | dot -Tsvg > graph.svg
 ```
-#### For help, run the following commands: ```make help```:
-##### Print:
+### For help, run the following commands: ```make help```:
+#### Print:
 
 ```make
 make help:         ## Run make help.
