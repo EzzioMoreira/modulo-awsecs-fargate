@@ -47,8 +47,10 @@ module "app-deploy" {
   containers_definitions = data.template_file.containers_definitions_json.rendered
   environment            = "your-environment"
   app_name               = "your-app-name"
+  app_count              = "2"
   app_port               = "80"
   fargate_version        = "1.4.0"
+  cloudwatch_group_name  = "your-app-name"
 }
 
 output "load_balancer_dns_name" {
