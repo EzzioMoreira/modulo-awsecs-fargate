@@ -54,7 +54,7 @@ module "app-deploy" {
 }
 
 output "load_balancer_dns_name" {
-  value = module.app-deploy.loadbalance_dns_name
+  value = "http://${module.app-deploy.loadbalance_dns_name}"
 }
 
 data "template_file" "containers_definitions_json" {
